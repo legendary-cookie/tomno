@@ -106,7 +106,7 @@ fn get_vol_access_mode(s: &str) -> String {
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let args: Vec<String> = std::env::args().collect();
     if args.len() <= 1 {
-        println!("Usage: nodock <path>");
+        println!("Usage: {} <path>", &args[0]);
         return Ok(());
     }
 
