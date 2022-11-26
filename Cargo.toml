@@ -10,3 +10,8 @@ hcl-rs = "0.10.0"
 serde = "1.0.147"
 serde_derive = "1.0.147"
 toml = "0.5.9"
+
+[profile.release]
+opt-level = 3
+strip = "symbols"
+lto = "thin"
