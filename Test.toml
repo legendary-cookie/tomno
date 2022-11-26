@@ -1,0 +1,32 @@
+[general]
+name = "bookstack"
+datacenters = ["dc1"]
+count = 1
+
+[[ports]]
+name = "http"
+to = 80
+
+[[services]]
+name = "bookstack"
+port = "http"
+tags = ["http"]
+check = { type = "http", path = "/status" }
+
+[[volumes]]
+name = "bookstack"
+# multi node multi writer
+accessMode = "mnmw"
+
+[[containers]]
+name = "web"
+image = "ghcr.io/linuxserver/bookstack:v22.10.2-ls50"
+ports = ["http"]
+mounts = [
+  { volume = "bookstack", mountpoint = "/config" }
+]
+env = [
+  { name = "PUID", val = 1000 },
+  { name = "PGID", val = 1000 },
+  { name = "APP_URL", val = "https://bookstack.example.com" }
+]
